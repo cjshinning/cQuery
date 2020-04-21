@@ -1,5 +1,5 @@
 var cQuery = function(selector, context){
-    // 构造函数
+    return new cQuery();
 }
 
 cQuery.prototype = {
@@ -8,6 +8,4 @@ cQuery.prototype = {
     age: function(){}
 }
 
-var a = new cQuery();
-
-a.name();
+cQuery.name();
