@@ -7,9 +7,13 @@ cQuery.prototype = {
         return this;
     },
     name: function(){
-        return this.age
+        return this
     },
     age: 20
+}
+
+cQuery.extend = cQuery.fn.extend = function(){
+    
 }
 
 cQuery.prototype.init.prototype = cQuery.prototype;
