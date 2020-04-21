@@ -1,11 +1,13 @@
 var cQuery = function(selector, context){
-    return new cQuery();
+    return cQuery.prototype.init();
 }
 
 cQuery.prototype = {
-    // 原型
+    init: function(){
+        return this;
+    },
     name: function(){},
     age: function(){}
 }
 
-cQuery.name();
+console.log(cQuery())
