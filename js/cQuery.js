@@ -4,9 +4,7 @@ var cQuery = function(selector, context){
 
 cQuery.prototype = {
     // 原型
-    name: function(){
-        console.log(111)
-    },
+    name: function(){},
     age: function(){}
 }
 
