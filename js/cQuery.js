@@ -31,6 +31,45 @@ cQuery.prototype = {
         }
         // return cQuery.makeArray(selector, this);
     },
+    bind: function(type, eventHandle){
+        var elem = this[0] || {};
+        elem.addEventListener(type, eventHandle, false);
+    },
+    html: function(value){
+        var elem = this[0] || {};
+        if ( value === undefined && elem.nodeType === 1 ) {
+            return elem.innerHTML;
+        }else{
+            elem.innerHTML = value;
+        }
+    },
+    css: function(name){
+        var elem = this[0] || {};
+        return window.getComputedStyle(elem, null).getPropertyValue(name);
+    },
+    ajax: function(config){
+        var doneFn;
+        var url = config.url;
+        var method = config.method || 'GET';
+        var complete = config.complete;
+        var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        xhr.open(method, url);
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState === 4){
+                if(xhr.status === 200){
+                    complete(xhr.responseText);
+                    doneFn(xhr.responseText);
+                }
+            }
+        };
+        xhr.send(xhr.responseText);
+        
+        return {
+            done: function(outfn){
+                doneFn = outfn;
+            }
+        }
+    },
     name: function(){
         return this
     },
@@ -43,4 +82,19 @@ cQuery.prototype = {
 
 cQuery.prototype.init.prototype = cQuery.prototype;
 
-cQuery('#app');
+console.log(cQuery('#app').html());
+// cQuery('#app').html('<p>我想改一下文字</p>');
+// cQuery('#app').bind('click', function(){
+//     alert(111)
+// })
+// console.log(cQuery('#app').css('color'));
+cQuery().ajax({
+    url: 'http://hdapi.37.com/?c=c_info&a=default&alias_info=zqwzck20200410&f=auto',
+    method: 'GET',
+    complete: function(data){
+        console.log(data);
+    }
+}).done(function(data){
+    console.log(data)
+})
+// console.log(cQuery.cAjax());
